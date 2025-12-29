@@ -12,7 +12,12 @@ function FormSignin() {
       <form className="mt-2">
         {/* Email */}
         <div className="py-2">
-          <Labeledinput />
+          <Labeledinput 
+            label="Email Address"
+            placeholder="Arjunasaputra@gmail.com"
+            id="email"
+          />
+          
         </div>
 
        
