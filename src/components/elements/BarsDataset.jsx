@@ -36,7 +36,7 @@ export default function BarsDataset(props) {
 
   const expensesSeries = dataset.series.map((item) =>
     item.dataKey === "amountLastWeek" ? { ...item, color: theme.color } : item
-);
+  );
 
   return (
     <BarChart

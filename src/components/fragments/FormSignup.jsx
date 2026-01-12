@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Labeledinput from "../elements/Labeledinput";
-import Button from "../elements/Button";
+import LabeledInput from "../Elements/LabeledInput";
+import Button from "../Elements/Button";
 
 function FormSignup() {
   const navigate = useNavigate();
