@@ -8,27 +8,24 @@ import AppSnackbar from "../components/elements/AppSnackbar";
 function SignIn() {
   const { login } = useContext(AuthContext);
 
+  // State dengan nama persis seperti soal
   const [snackbar, setSnackbar] = useState({
-    open: false,
-    message: "",
+    tampil: false,
+    teks: "",
     severity: "success",
   }); 
   
+  // Fungsi handleCloseSnackbar sesuai soal
   const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({ ...prev, open: false }));
+    setSnackbar({ ...snackbar, tampil: false });
   };
 
   const handleLogin = async (email, password) => {
     try {
       const { refreshToken } = await loginService(email, password);
-      
       login(refreshToken); 
     } catch (err) {
-      setSnackbar({ 
-        open: true, 
-        message: err.message || "Login gagal", 
-        severity: "error" 
-      });
+      setSnackbar({ tampil: true, teks: err.msg, severity: "error" });
     }
   };
 
@@ -37,8 +34,8 @@ function SignIn() {
       <FormSignIn onSubmit={handleLogin} />
 
       <AppSnackbar
-        open={snackbar.open}
-        message={snackbar.message}
+        open={snackbar.tampil}
+        message={snackbar.teks}
         severity={snackbar.severity}
         onClose={handleCloseSnackbar}
       />

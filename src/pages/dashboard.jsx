@@ -40,9 +40,10 @@ function Dashboard() {
       const response = await goalService();
       setGoals(response);
     } catch (err) {
+
       setSnackbar({
         open: true,
-        message: "Gagal mengambil data goals:",
+        message: "Gagal mengambil data goals",
         severity: "eror",
       });
       

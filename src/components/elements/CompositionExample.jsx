@@ -7,20 +7,16 @@ import {
 import * as React from "react";
 import { ThemeContext } from "../../context/themeContext";
 
-function GaugePointer(props) {
-  const { color } = props;
-
+function GaugePointer({ color }) {
   const { valueAngle, outerRadius, cx, cy } = useGaugeState();
 
-  if (valueAngle === null) {
-    // No value to display
-    return null;
-  }
+  if (valueAngle == null) return null;
 
   const target = {
     x: cx + outerRadius * Math.sin(valueAngle),
     y: cy - outerRadius * Math.cos(valueAngle),
   };
+
   return (
     <g>
       <circle cx={cx} cy={cy} r={5} fill={color} />
@@ -33,9 +29,11 @@ function GaugePointer(props) {
   );
 }
 
-export default function CompositionExample(props) {
-  const { data } = props;
+export default function CompositionExample({ data }) {
   const { theme } = React.useContext(ThemeContext);
+
+  // ✅ HARD GUARANTEE NUMBER + RANGE
+  const value = Math.min(Math.max(Number(data) || 0, 0), 100);
 
   return (
     <GaugeContainer
@@ -43,15 +41,18 @@ export default function CompositionExample(props) {
       height={80}
       startAngle={-90}
       endAngle={90}
-      value={data}
-      sx={() => ({
-        [`& .value-arc`]: {
-          fill: "#299D91",
+      value={value}
+      valueMin={0}      // 🔥 INI YANG SEBELUMNYA HILANG
+      valueMax={100}    // 🔥 WAJIB
+      sx={{
+        "& .value-arc": {
+          fill: theme.color,
         },
-      })}
+      }}
     >
+      {/* 🔥 Reference arc HARUS tahu range */}
       <GaugeReferenceArc />
-      <GaugeValueArc sx={{ fill: theme.color }} />
+      <GaugeValueArc />
       <GaugePointer color={theme.color} />
     </GaugeContainer>
   );

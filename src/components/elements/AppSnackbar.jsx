@@ -2,6 +2,8 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 
 function AppSnackbar({ open, message, severity = "success", onClose }) {
+  if (!message) return null; // ⬅️ INI KUNCI UTAMA
+
   return (
     <Snackbar
       open={open}
