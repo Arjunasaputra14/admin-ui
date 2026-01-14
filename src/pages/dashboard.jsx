@@ -8,7 +8,6 @@ import CardRecentTransaction from "../components/fragments/CardRecentTransaction
 import CardStatistic from "../components/fragments/CardStatistic";
 import CardExpenseBeakdown from "../components/fragments/CardExpenseBeakdown";
 
-
 import {
   transactions,
   bills,
@@ -28,11 +27,11 @@ function Dashboard() {
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
-    severity: "succes"
+    severity: "success" // ✅ PERBAIKAN: "succes" → "success"
   });
 
   const handleCloseSnackbar = () => {
-    setSnackbar((prev) => ({...prev, open: false}));
+    setSnackbar((prev) => ({ ...prev, open: false }));
   };
 
   const fetchGoals = async () => {
@@ -40,13 +39,12 @@ function Dashboard() {
       const response = await goalService();
       setGoals(response);
     } catch (err) {
-
+      // ✅ PERBAIKAN: "eror" → "error"
       setSnackbar({
         open: true,
         message: "Gagal mengambil data goals",
-        severity: "eror",
+        severity: "error", // ← INI YANG DIPERBAIKI
       });
-      
 
       // biasanya axios: err.response.status
       if (err?.response?.status === 401) {
@@ -90,10 +88,10 @@ function Dashboard() {
       </div>
 
       <AppSnackbar
-      open={snackbar.open}
-      message={snackbar.message}
-      severity={snackbar.severity}
-      onClose={handleCloseSnackbar}
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={handleCloseSnackbar}
       />
     </MainLayout>
   );
