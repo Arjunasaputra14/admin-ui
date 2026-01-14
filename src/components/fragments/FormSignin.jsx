@@ -1,5 +1,5 @@
 import React from "react";
-import LabeledInput from "../elements/LabeledInput";
+import LabeledInput from "../elements/Labeledinput";
 import CheckBox from "../elements/CheckBox";
 import Button from "../elements/Button";
 import { Link } from "react-router-dom";
